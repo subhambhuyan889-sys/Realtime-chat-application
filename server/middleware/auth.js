@@ -1,0 +1,1 @@
+const jwt=require("jsonwebtoken");module.exports=(req,res,next)=>{try{const h=req.headers.authorization||"",t=h.startsWith("Bearer ")?h.slice(7):"",p=jwt.verify(t,process.env.JWT_SECRET);req.user={id:p.id,username:p.username};next();}catch{return res.status(401).json({message:"Authentication required"});}};
